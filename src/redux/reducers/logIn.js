@@ -5,6 +5,7 @@ const initialState = {
   currentUser: {
     email: "",
     password: "",
+    imgProfilo: "",
   },
 };
 
@@ -13,10 +14,14 @@ const logIn = (state = initialState, action) => {
     case ADD_NEW_USER: {
       return {
         ...state,
-        users: [...state.users, { email: action.payload.email, password: action.payload.password }],
+        users: [
+          ...state.users,
+          { email: action.payload.email, password: action.payload.password, imgProfilo: action.payload.imgProfilo },
+        ],
         currentUser: {
           email: action.payload.email,
           password: action.payload.password,
+          imgProfilo: action.payload.imgProfilo,
         },
       };
     }
