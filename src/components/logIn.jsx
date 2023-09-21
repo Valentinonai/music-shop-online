@@ -1,29 +1,56 @@
 import { useState } from "react";
-import { Button, Col, Container, Form, Row } from "react-bootstrap";
+import { Alert, Button, Col, Container, Form, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { logInUserOk } from "../redux/actions";
+import { Link, useNavigate } from "react-router-dom";
+import { deleteAccount, logInUserOk } from "../redux/actions";
 
 const LogIn = () => {
   const prevemail = useSelector((state) => state.usersData.currentUser.email);
   const previmg = useSelector((state) => state.usersData.currentUser.imgProfilo);
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState(prevemail ? prevemail : "");
   const [password, setPassword] = useState("");
+  const [log, setLog] = useState(false);
+  const [noLog, setNoLog] = useState(false);
   const users = useSelector((state) => state.usersData.users);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const checkLogIn = (e) => {
     e.preventDefault();
 
     for (let i = 0; i < users.length; i++) {
-      if (users[i].email === email ? email : prevemail && users[i].password === password) {
+      if (users[i].email === email && users[i].password === password) {
+        setLog(true);
         dispatch(logInUserOk(users[i].email, users[i].password, users[i].imgProfilo));
-        console.log("ciao");
-      } else console.log("errore");
+        setTimeout(() => {
+          setLog(false);
+          navigate("/");
+        }, 2000);
+        return;
+      }
+    }
+    setNoLog(true);
+    setTimeout(() => {
+      setNoLog(false);
+    }, 2000);
+    setPassword("");
+  };
+
+  const delAccount = () => {
+    for (let i = 0; i < users.length; i++) {
+      if (users[i].email === email && users[i].password === password) {
+        dispatch(deleteAccount(i));
+        setEmail("");
+        setPassword("");
+      }
     }
   };
+
   return (
     <Container className="mt-5 border border-white p-3 rounded" style={{ color: "white", width: "50%" }}>
+      {log && <Alert variant="success">LogIn Effettuato</Alert>}
+      {noLog && <Alert variant="danger">Password Errata</Alert>}
+
       <h1>Accedi a SongStore</h1>
       <Row>
         <Col xs={12}>
@@ -45,7 +72,7 @@ const LogIn = () => {
               <Form.Control
                 type="email"
                 placeholder="Enter email"
-                defaultValue={prevemail ? prevemail : email}
+                value={email}
                 required
                 onChange={(e) => setEmail(e.target.value)}
                 className="inputForm"
@@ -58,7 +85,7 @@ const LogIn = () => {
                 type="password"
                 placeholder="Password"
                 required
-                defaultValue={password}
+                value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className="inputForm"
               />
@@ -71,7 +98,9 @@ const LogIn = () => {
           <hr />
         </Col>
         <Col xs={12}>
-          <a href="#">Elimina Account</a>
+          <a href="#" onClick={delAccount}>
+            Elimina Account
+          </a>
           <hr />
           <div>
             <Link to={"/signUp"}>Non hai un account? Iscrivi a SongStore</Link>

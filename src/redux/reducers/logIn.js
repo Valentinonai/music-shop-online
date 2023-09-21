@@ -1,4 +1,4 @@
-import { ADD_NEW_USER, LOG_IN_USER_OK } from "../actions";
+import { ADD_NEW_USER, ELIMINA_ACCOUNT, LOG_IN_USER_OK } from "../actions";
 
 const initialState = {
   users: [],
@@ -36,6 +36,18 @@ const logIn = (state = initialState, action) => {
           imgProfilo: action.payload.imgProfilo,
         },
         logCheck: true,
+      };
+    }
+    case ELIMINA_ACCOUNT: {
+      return {
+        ...state,
+        users: state.users.filter((_, i) => i !== action.payload),
+        currentUser: {
+          email: "",
+          password: "",
+          imgProfilo: "",
+        },
+        logCheck: false,
       };
     }
     default:

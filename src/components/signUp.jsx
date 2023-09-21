@@ -1,20 +1,29 @@
 import { useState } from "react";
-import { Button, Col, Container, Form, Row } from "react-bootstrap";
+import { Alert, Button, Col, Container, Form, Row } from "react-bootstrap";
 import { addNewUser } from "../redux/actions";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [imgProfilo, setImgProfilo] = useState("");
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [accountCreato, setAccountCreato] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setAccountCreato(true);
     dispatch(addNewUser(email, password, imgProfilo));
+    setTimeout(() => {
+      setAccountCreato(false);
+      navigate("/");
+    }, 2000);
   };
   return (
     <Container className=" mt-5 border border-white p-3 rounded" style={{ color: "white" }}>
+      {accountCreato && <Alert variant="success">Account Creato</Alert>}
       <h1>Accedi a SongStore</h1>
       <Row>
         <Col xs={12}>
@@ -47,7 +56,6 @@ const SignUp = () => {
               <Form.Control
                 type="text"
                 placeholder="URL"
-                required
                 defaultValue=""
                 onChange={(e) => setImgProfilo(e.target.value)}
                 className="inputForm"
