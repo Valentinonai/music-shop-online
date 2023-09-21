@@ -7,59 +7,24 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
 }
 
-.background {
-  background-color: #1a1a1a;
-  border-radius: 10px;
-  padding: 20px;
-  text-align: center;
-}
-
-nav {
-  background-color: #1a1a1a;
-  height: 80px;
-  position: fixed;
-  width: 100%;
-  top: 0;
-  right: 0;
-  z-index: 100;
-  margin-top: -10px;
-}
-
-.container {
-  background-color: #1a1a1a;
-  border-radius: 10px;
-  padding: 20px;
-  text-align: center;
-}
-
-h1 {
-  font-size: 40px;
-  color: white;
-  margin-bottom: 20px;
-}
-
-hr {
-  border-top: 1px solid rgb(65, 63, 63);
-  margin: 20px 0;
-}
-
-p {
-  margin: 10px 0;
-}
 .inputForm {
-  height: 25px;
-  width: 55%;
+  height: 40px;
+  width: 100%;
   padding: 10px;
   margin: 5px 0;
   border: 2px solid rgb(78, 75, 75);
   border-radius: 4px;
   background-color: rgb(37, 35, 35);
   color: white;
+  border: none;
 }
-
+.inputForm:focus {
+  background-color: rgb(37, 35, 35);
+  color: white;
+  border: none;
+}
 .accedi-button {
   background-color: #845ed3;
   color: black;
@@ -73,9 +38,8 @@ p {
   width: 60%;
   border-radius: 30px;
 }
-
 .accedi-button:hover {
-  background-color: #845ed3;
+  background-color: #845ed3 !important;
 }
 
 a {

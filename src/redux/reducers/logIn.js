@@ -1,4 +1,4 @@
-import { ADD_NEW_USER } from "../actions";
+import { ADD_NEW_USER, LOG_IN_USER_OK } from "../actions";
 
 const initialState = {
   users: [],
@@ -7,6 +7,7 @@ const initialState = {
     password: "",
     imgProfilo: "",
   },
+  logCheck: false,
 };
 
 const logIn = (state = initialState, action) => {
@@ -23,6 +24,18 @@ const logIn = (state = initialState, action) => {
           password: action.payload.password,
           imgProfilo: action.payload.imgProfilo,
         },
+        logCheck: true,
+      };
+    }
+    case LOG_IN_USER_OK: {
+      return {
+        ...state,
+        currentUser: {
+          email: action.payload.email,
+          password: action.payload.password,
+          imgProfilo: action.payload.imgProfilo,
+        },
+        logCheck: true,
       };
     }
     default:

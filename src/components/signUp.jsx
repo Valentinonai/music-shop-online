@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Container } from "react-bootstrap";
+import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { addNewUser } from "../redux/actions";
 import { useDispatch } from "react-redux";
 
@@ -14,48 +14,53 @@ const SignUp = () => {
     dispatch(addNewUser(email, password, imgProfilo));
   };
   return (
-    <Container>
-      <h1>SignUp SongStore</h1>
-      <hr />
-      <form className="form-box" onSubmit={handleSubmit}>
-        <p className="inputBox">Indirizzo e-mail</p>
-        <input
-          type="email"
-          class="inputForm"
-          defaultValue={email}
-          required
-          placeholder="Inserisci il tuo indirizzo e-mail"
-          onChange={(e) => {
-            setEmail(e.target.value);
-          }}
-        />
-        <p className="inputBox">Password</p>
-        <input
-          type="password"
-          class="inputForm"
-          defaultValue={password}
-          required
-          placeholder="Inserisci la tua password"
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
-        />
-        <p className="inputBox">Immagine Profilo URL</p>
-        <input
-          type="text"
-          class="inputForm"
-          defaultValue={imgProfilo}
-          placeholder="Inserisci URL immagine profilo"
-          onChange={(e) => {
-            setImgProfilo(e.target.value);
-          }}
-        />
-        <button type="submit" className="accedi-button">
-          Accedi
-        </button>
-      </form>
+    <Container className=" mt-5 border border-white p-3 rounded" style={{ color: "white" }}>
+      <h1>Accedi a SongStore</h1>
+      <Row>
+        <Col xs={12}>
+          <Form onSubmit={handleSubmit}>
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Label>Email address</Form.Label>
+              <Form.Control
+                type="email"
+                placeholder="Enter email"
+                defaultValue={email}
+                required
+                onChange={(e) => setEmail(e.target.value)}
+                className="inputForm"
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="formBasicPassword">
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="Password"
+                required
+                defaultValue={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="inputForm"
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicImg">
+              <Form.Label>Immagine Profilo</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="URL"
+                required
+                defaultValue=""
+                onChange={(e) => setImgProfilo(e.target.value)}
+                className="inputForm"
+              />
+            </Form.Group>
+
+            <Button className="accedi-button" type="submit">
+              Submit
+            </Button>
+          </Form>
+        </Col>
+      </Row>
     </Container>
   );
 };
-
 export default SignUp;
