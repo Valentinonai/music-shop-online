@@ -5,6 +5,8 @@
 /.pnp
 .pnp.js
 
+/public/0version_desktop_albumpage.png
+
 # testing
 /coverage
 
