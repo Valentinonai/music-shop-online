@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Alert, Button, Col, Container, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { checkEmail } from "../redux/actions";
+import { checkEmail, checkPassword } from "../redux/actions";
 
 const User = () => {
   const user = useSelector((state) => state.usersData.currentUser);
@@ -150,6 +150,7 @@ const User = () => {
                       <input
                         type="email"
                         className=" inputForm"
+                        title="la mail deve essere una mail esistente"
                         value={editEmail}
                         onChange={(e) => {
                           setEditEmail(e.target.value);
@@ -197,6 +198,9 @@ const User = () => {
                       <input
                         className=" inputForm"
                         value={editPassword}
+                        title="la password deve
+                        contenere uno dei seguenti caratteri( $ @ # ! ? * + . & % ( ) _ : , ; / = - ' ), una lettera maiuscola e
+                        almeno 6 caratteri"
                         onChange={(e) => {
                           setEditPassword(e.target.value);
                         }}
@@ -205,7 +209,7 @@ const User = () => {
                         variant="outline-light"
                         className=""
                         onClick={() => {
-                          if (editPassword !== "" && editPassword !== undefined) {
+                          if (editPassword !== "" && editPassword !== undefined && checkPassword(editPassword)) {
                             dispatch({
                               type: "EDIT_PASSWORD",
                               payload: { editPassword: editPassword, email: user.email },

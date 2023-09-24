@@ -25,3 +25,13 @@ export const checkEmail = (email) => {
     return true;
   else return false;
 };
+
+export const checkPassword = (password) => {
+  let app = false;
+  for (let i = 0; i < password.length; i++) {
+    if (password.charCodeAt(i) > 64 && password.charCodeAt(i) < 91) app = true;
+  }
+  if (password.search(/[$|@|#|!|?|*|+|.|&|%|(|)|_|:|,|;|/|||=|-|']+/i) !== -1 && app && password.length > 5) {
+    return true;
+  } else return false;
+};

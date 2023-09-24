@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Alert, Button, Col, Container, Form, Row } from "react-bootstrap";
-import { addNewUser, checkEmail } from "../redux/actions";
+import { addNewUser, checkEmail, checkPassword } from "../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -18,7 +18,7 @@ const SignUp = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (checkEmail(email)) {
+    if (checkEmail(email) && checkPassword(password)) {
       if (users.findIndex((elem) => elem.email === email) === -1) {
         setAccountCreato(true);
         dispatch(addNewUser(email, password, imgProfilo, name));
@@ -47,7 +47,9 @@ const SignUp = () => {
         {noMail && <Alert variant="danger">Mail già esistente</Alert>}
         {genericError && (
           <Alert variant="warning">
-            I dati non soddisfano i parametri richiesti(la mail deve essere una mail esistente)
+            I dati non soddisfano i parametri richiesti(la mail deve essere una mail esistente) e la password deve
+            contenere uno dei seguenti caratteri("$"@"#"!"?"*"+"."&"%"(")"_":",";"/"="-"'"), una lettera maiuscola e
+            almeno 6 caratteri
           </Alert>
         )}
 
