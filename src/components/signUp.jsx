@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Alert, Button, Col, Container, Form, Row } from "react-bootstrap";
-import { addNewUser } from "../redux/actions";
+import { addNewUser, checkEmail } from "../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -14,21 +14,29 @@ const SignUp = () => {
   const [name, setName] = useState("");
   const users = useSelector((state) => state.usersData.users);
   const [noMail, setNoMail] = useState(false);
+  const [genericError, setGenericError] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (users.findIndex((elem) => elem.email === email) === -1) {
-      setAccountCreato(true);
-      dispatch(addNewUser(email, password, imgProfilo, name));
-      setTimeout(() => {
-        setAccountCreato(false);
-        navigate("/");
-      }, 2000);
+    if (checkEmail(email)) {
+      if (users.findIndex((elem) => elem.email === email) === -1) {
+        setAccountCreato(true);
+        dispatch(addNewUser(email, password, imgProfilo, name));
+        setTimeout(() => {
+          setAccountCreato(false);
+          navigate("/");
+        }, 2000);
+      } else {
+        setNoMail(true);
+        setTimeout(() => {
+          setNoMail(false);
+        }, 2000);
+      }
     } else {
-      setNoMail(true);
+      setGenericError(true);
       setTimeout(() => {
-        setNoMail(false);
-      }, 2000);
+        setGenericError(false);
+      }, 4000);
     }
   };
   return (
@@ -37,6 +45,11 @@ const SignUp = () => {
       <Container className=" mt-5 border border-white p-3 rounded" style={{ color: "white" }}>
         {accountCreato && <Alert variant="success">Account Creato</Alert>}
         {noMail && <Alert variant="danger">Mail già esistente</Alert>}
+        {genericError && (
+          <Alert variant="warning">
+            I dati non soddisfano i parametri richiesti(la mail deve essere una mail esistente)
+          </Alert>
+        )}
 
         <Row>
           <Col xs={12}>

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Alert, Button, Col, Container, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { checkEmail } from "../redux/actions";
 
 const User = () => {
   const user = useSelector((state) => state.usersData.currentUser);
@@ -159,7 +160,7 @@ const User = () => {
                         className=""
                         onClick={() => {
                           if (users.findIndex((elem) => elem.email === editEmail) === -1 || editEmail === user.email) {
-                            if (editEmail.includes("@")) {
+                            if (checkEmail(editEmail)) {
                               dispatch({ type: "EDIT_EMAIL", payload: { editEmail: editEmail, email: user.email } });
                               setEditEmailBool(false);
                             } else {
