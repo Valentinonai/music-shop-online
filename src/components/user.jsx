@@ -19,6 +19,9 @@ const User = () => {
   const [editPasswordBool, setEditPasswordBool] = useState(false);
   const [editPassword, setEditPassword] = useState(user.password);
 
+  const [editImgBool, setEditImgBool] = useState(false);
+  const [editImg, setEditImg] = useState(user.imgProfilo);
+
   const [emailAlert, setEmailAlert] = useState(false);
 
   const delAccount = () => {
@@ -38,6 +41,21 @@ const User = () => {
           <h1 className="mt-5 mb-1">Profile Page</h1>
           <Container>
             <Row className=" mt-5 border border-1 border-white rounded p-3 g-5">
+              {editImgBool && (
+                <input
+                  className="mt-3 inputForm"
+                  defaultValue={editImg}
+                  onChange={(e) => {
+                    setEditImg(e.target.value);
+                  }}
+                  onKeyUp={(e) => {
+                    if (e.key === "Enter") {
+                      dispatch({ type: "EDIT_IMG", payload: { editImg: editImg, email: user.email } });
+                      setEditImgBool(false);
+                    }
+                  }}
+                />
+              )}
               <Col xs={12} md={4} className="mt-3">
                 <div>
                   <div
@@ -60,7 +78,10 @@ const User = () => {
                       width="100%"
                       className="mb-4"
                     />
-                    <span style={{ position: "absolute", bottom: "20px", right: "25px", cursor: "pointer" }}>
+                    <span
+                      style={{ position: "absolute", bottom: "20px", right: "25px", cursor: "pointer" }}
+                      onClick={() => setEditImgBool(true)}
+                    >
                       <i class="bi bi-pencil-square"></i>
                     </span>
                   </div>
@@ -76,7 +97,7 @@ const User = () => {
                 <div className="d-flex justify-content-between align-items-center">
                   {editNameBool ? (
                     <input
-                      className="mb-3"
+                      className="mb-3 inputForm"
                       defaultValue={editName}
                       onChange={(e) => {
                         setEditName(e.target.value);
@@ -100,7 +121,7 @@ const User = () => {
                 <div className="d-flex justify-content-between align-items-center">
                   {editEmailBool ? (
                     <input
-                      className="mb-3"
+                      className="mb-3 inputForm"
                       value={editEmail}
                       onChange={(e) => {
                         setEditEmail(e.target.value);
@@ -132,7 +153,7 @@ const User = () => {
                 <div className="d-flex justify-content-between align-items-center">
                   {editPasswordBool ? (
                     <input
-                      className="mb-3"
+                      className="mb-3 inputForm"
                       defaultValue={editPassword}
                       onChange={(e) => {
                         setEditPassword(e.target.value);

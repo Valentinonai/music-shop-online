@@ -110,6 +110,19 @@ const logIn = (state = initialState, action) => {
         ],
       };
     }
+    case "EDIT_IMG": {
+      return {
+        ...state,
+        currentUser: {
+          ...state.currentUser,
+          imgProfilo: action.payload.editImg,
+        },
+        users: [
+          ...state.users.filter((elem) => elem.email !== action.payload.email),
+          { ...state.currentUser, imgProfilo: action.payload.editImg },
+        ],
+      };
+    }
     default:
       return state;
   }
