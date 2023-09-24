@@ -79,3 +79,7 @@ h2 {
   padding: 0;
   box-shadow: 0 0 10px 2px #845ed3;
 }
+
+span:hover {
+  opacity: 0.5;
+}

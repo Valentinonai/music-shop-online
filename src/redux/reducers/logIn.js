@@ -58,6 +58,16 @@ const logIn = (state = initialState, action) => {
         logCheck: false,
       };
     }
+    case "DELETE_FROM_USER_PAGE":
+      return {
+        ...state,
+        currentUser: {
+          email: "",
+          password: "",
+          imgProfilo: "",
+        },
+        users: state.users.filter((elem) => elem.email !== action.payload),
+      };
     default:
       return state;
   }
