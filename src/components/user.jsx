@@ -63,7 +63,7 @@ const User = () => {
                       setEditImgBool(false);
                     }}
                   >
-                    <i class="bi bi-floppy2"></i>
+                    <i className="bi bi-floppy2"></i>
                   </Button>
                 </div>
               )}
@@ -93,14 +93,14 @@ const User = () => {
                       style={{ position: "absolute", bottom: "20px", right: "25px", cursor: "pointer" }}
                       onClick={() => setEditImgBool(true)}
                     >
-                      <i class="bi bi-pencil-square"></i>
+                      <i className="bi bi-pencil-square"></i>
                     </span>
                   </div>
                   <Button variant="outline-light" className="d-none d-md-block" onClick={delAccount}>
                     Elimina Account
                   </Button>
                   <Button variant="outline-light" className="d-block d-md-none" onClick={delAccount}>
-                    <i class="bi bi-trash3"></i>
+                    <i className="bi bi-trash3"></i>
                   </Button>
                 </div>
               </Col>
@@ -131,14 +131,14 @@ const User = () => {
                           }
                         }}
                       >
-                        <i class="bi bi-floppy2"></i>
+                        <i className="bi bi-floppy2"></i>
                       </Button>
                     </div>
                   ) : (
                     <>
                       <h4>Nome: {user.userName}</h4>
                       <span style={{ cursor: "pointer" }} onClick={() => setEditNameBool(true)}>
-                        <i class="bi bi-pencil-square"></i>
+                        <i className="bi bi-pencil-square"></i>
                       </span>
                     </>
                   )}
@@ -178,14 +178,14 @@ const User = () => {
                           }
                         }}
                       >
-                        <i class="bi bi-floppy2"></i>
+                        <i className="bi bi-floppy2"></i>
                       </Button>
                     </div>
                   ) : (
                     <>
                       <h4>Email: {user.email}</h4>
                       <span style={{ cursor: "pointer" }}>
-                        <i class="bi bi-pencil-square" onClick={() => setEditEmailBool(true)}></i>
+                        <i className="bi bi-pencil-square" onClick={() => setEditEmailBool(true)}></i>
                       </span>
                     </>
                   )}
@@ -219,14 +219,14 @@ const User = () => {
                           }
                         }}
                       >
-                        <i class="bi bi-floppy2"></i>
+                        <i className="bi bi-floppy2"></i>
                       </Button>
                     </div>
                   ) : (
                     <>
                       <h4>Password: ************</h4>
                       <span style={{ cursor: "pointer" }}>
-                        <i class="bi bi-pencil-square" onClick={() => setEditPasswordBool(true)}></i>
+                        <i className="bi bi-pencil-square" onClick={() => setEditPasswordBool(true)}></i>
                       </span>
                     </>
                   )}
