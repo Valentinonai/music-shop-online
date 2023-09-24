@@ -77,19 +77,18 @@ const User = () => {
                       width: "150px",
                       height: "150px",
                       borderRadius: "75px",
-                    }}
-                    className="me-5 mb-3"
-                  >
-                    <img
-                      src={
+                      backgroundImage: `URL(${
                         user.imgProfilo !== ""
                           ? user.imgProfilo
                           : "https://cdn-icons-png.flaticon.com/512/149/149071.png"
-                      }
-                      alt="imgProfilo"
-                      width="100%"
-                      className="mb-4"
-                    />
+                      })`,
+                      boxShadow: "inset 0 0 0 2000px rgba(78, 77, 77, 0.3)",
+                      // backgroundPosition: "center",
+                      backgroundSize: "cover",
+                      backgroundRepeat: "no-repeat",
+                    }}
+                    className="me-5 mb-3"
+                  >
                     <span
                       style={{ position: "absolute", bottom: "20px", right: "25px", cursor: "pointer" }}
                       onClick={() => setEditImgBool(true)}
