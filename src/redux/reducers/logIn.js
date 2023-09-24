@@ -54,6 +54,7 @@ const logIn = (state = initialState, action) => {
           email: "",
           password: "",
           imgProfilo: "",
+          userName: "",
         },
         logCheck: false,
       };
@@ -65,8 +66,10 @@ const logIn = (state = initialState, action) => {
           email: "",
           password: "",
           imgProfilo: "",
+          userName: "",
         },
         users: state.users.filter((elem) => elem.email !== action.payload),
+        logCheck: false,
       };
     default:
       return state;
