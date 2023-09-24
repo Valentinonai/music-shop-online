@@ -23,21 +23,21 @@ const AlbumPageHeroSection = () => {
             <p>{new Date(album.release_date).toLocaleDateString()}</p>
             <div className="d-flex gap-2">
               {/* start not filled
-            <i class="bi bi-star"></i> */}
+            <i className="bi bi-star"></i> */}
 
               {/* star half filled
-            <i class="bi bi-star-half"></i> */}
+            <i className="bi bi-star-half"></i> */}
               <div className="d-flex">
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
+                <i className="bi bi-star-fill"></i>
+                <i className="bi bi-star-fill"></i>
+                <i className="bi bi-star-fill"></i>
+                <i className="bi bi-star-fill"></i>
+                <i className="bi bi-star-fill"></i>
               </div>
               <p>({album.fans})</p>
             </div>
           </div>
-          <div className="d-flex gap-1">
+          <div className="d-flex gap-1" style={{ marginRight: "35px" }}>
             <div className="price">4.99$</div>
             <Button className="my-btn">Add to cart</Button>
           </div>

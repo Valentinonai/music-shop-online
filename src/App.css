@@ -15,6 +15,14 @@ body {
   color: white;
 }
 
+.tx-center {
+  text-align: center;
+}
+
+.tx-right {
+  text-align: right;
+}
+
 .my-btn {
   background-color: var(--primaryColor);
   border: 1px solid var(--primaryColor);
@@ -37,8 +45,14 @@ body {
   font-weight: 500;
 }
 
-.bi.bi-star-fill,
-.bi.bi-star-half,
-.bi.bi-star {
+.bi {
   color: var(--primaryColor);
+}
+
+.track:hover {
+  background-color: var(--secondaryGrey);
+}
+
+.pointer {
+  cursor: pointer;
 }
