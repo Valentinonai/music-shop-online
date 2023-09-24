@@ -1,38 +1,44 @@
-.App {
-  text-align: center;
+:root {
+  --primaryColor: #845ed3;
+  --dark-primaryColor: #652ddd;
+  --black: #1a1a1a;
+  --likeColor: #dc5f64;
+  --secondaryGrey: #4c4c4c;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+p {
+  margin: 0 !important;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+body {
+  background-color: var(--black);
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.my-btn {
+  background-color: var(--primaryColor);
+  border: 1px solid var(--primaryColor);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.my-btn:hover,
+.price:hover {
+  color: white;
+  background-color: var(--dark-primaryColor);
+  border: 1px solid var(--dark-primaryColor);
+}
+
+.price {
+  border: 1px solid var(--primaryColor);
+  /* border-radius: 0.375rem; */
+  border-radius: 6px;
+  padding: 5px 13px;
+  color: var(--primaryColor);
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.bi.bi-star-fill,
+.bi.bi-star-half,
+.bi.bi-star {
+  color: var(--primaryColor);
 }
