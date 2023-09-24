@@ -1,4 +1,4 @@
-import { Button, Container, Image } from "react-bootstrap";
+import { Button, Image } from "react-bootstrap";
 import { useSelector } from "react-redux";
 
 const AlbumPageHeroSection = () => {
