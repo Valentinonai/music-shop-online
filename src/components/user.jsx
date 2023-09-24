@@ -8,6 +8,18 @@ const User = () => {
   const dispatch = useDispatch();
   const [del, setDel] = useState(false);
   const navigate = useNavigate();
+  const users = useSelector((state) => state.usersData.users);
+
+  const [editNameBool, setEditNameBool] = useState(false);
+  const [editName, setEditName] = useState(user.userName);
+
+  const [editEmailBool, setEditEmailBool] = useState(false);
+  const [editEmail, setEditEmail] = useState(user.email);
+
+  const [editPasswordBool, setEditPasswordBool] = useState(false);
+  const [editPassword, setEditPassword] = useState(user.password);
+
+  const [emailAlert, setEmailAlert] = useState(false);
 
   const delAccount = () => {
     setDel(true);
@@ -20,6 +32,7 @@ const User = () => {
   return (
     <>
       {del && <Alert variant="danger">Account Eliminato</Alert>}
+      {emailAlert && <Alert variant="warning">Mail già esistente Scegline un'altra</Alert>}
       {user.email !== "" && (
         <>
           <h1 className="mt-5 mb-1">Profile Page</h1>
@@ -61,22 +74,87 @@ const User = () => {
               </Col>
               <Col xs={12} md={8}>
                 <div className="d-flex justify-content-between align-items-center">
-                  <h4>Nome: {user.userName}</h4>
-                  <span style={{ cursor: "pointer" }}>
-                    <i class="bi bi-pencil-square"></i>
-                  </span>
+                  {editNameBool ? (
+                    <input
+                      className="mb-3"
+                      defaultValue={editName}
+                      onChange={(e) => {
+                        setEditName(e.target.value);
+                      }}
+                      onKeyUp={(e) => {
+                        if (e.key === "Enter") {
+                          dispatch({ type: "EDIT_NAME", payload: { editName: editName, email: user.email } });
+                          setEditNameBool(false);
+                        }
+                      }}
+                    />
+                  ) : (
+                    <>
+                      <h4>Nome: {user.userName}</h4>
+                      <span style={{ cursor: "pointer" }} onClick={() => setEditNameBool(true)}>
+                        <i class="bi bi-pencil-square"></i>
+                      </span>
+                    </>
+                  )}
                 </div>
                 <div className="d-flex justify-content-between align-items-center">
-                  <h4>Email: {user.email}</h4>
-                  <span style={{ cursor: "pointer" }}>
-                    <i class="bi bi-pencil-square"></i>
-                  </span>
+                  {editEmailBool ? (
+                    <input
+                      className="mb-3"
+                      value={editEmail}
+                      onChange={(e) => {
+                        setEditEmail(e.target.value);
+                      }}
+                      onKeyUp={(e) => {
+                        if (e.key === "Enter") {
+                          if (users.findIndex((elem) => elem.email === editEmail) === -1) {
+                            dispatch({ type: "EDIT_EMAIL", payload: { editEmail: editEmail, email: user.email } });
+                            setEditEmailBool(false);
+                          } else {
+                            setEmailAlert(true);
+                            setTimeout(() => {
+                              setEmailAlert(false);
+                              setEditEmail(user.email);
+                            }, 2000);
+                          }
+                        }
+                      }}
+                    />
+                  ) : (
+                    <>
+                      <h4>Email: {user.email}</h4>
+                      <span style={{ cursor: "pointer" }}>
+                        <i class="bi bi-pencil-square" onClick={() => setEditEmailBool(true)}></i>
+                      </span>
+                    </>
+                  )}
                 </div>
                 <div className="d-flex justify-content-between align-items-center">
-                  <h4>Password: ************</h4>
-                  <span style={{ cursor: "pointer" }}>
-                    <i class="bi bi-pencil-square"></i>
-                  </span>
+                  {editPasswordBool ? (
+                    <input
+                      className="mb-3"
+                      defaultValue={editPassword}
+                      onChange={(e) => {
+                        setEditPassword(e.target.value);
+                      }}
+                      onKeyUp={(e) => {
+                        if (e.key === "Enter") {
+                          dispatch({
+                            type: "EDIT_PASSWORD",
+                            payload: { editPassword: editPassword, email: user.email },
+                          });
+                          setEditPasswordBool(false);
+                        }
+                      }}
+                    />
+                  ) : (
+                    <>
+                      <h4>Password: ************</h4>
+                      <span style={{ cursor: "pointer" }}>
+                        <i class="bi bi-pencil-square" onClick={() => setEditPasswordBool(true)}></i>
+                      </span>
+                    </>
+                  )}
                 </div>
               </Col>
             </Row>

@@ -71,6 +71,45 @@ const logIn = (state = initialState, action) => {
         users: state.users.filter((elem) => elem.email !== action.payload),
         logCheck: false,
       };
+    case "EDIT_NAME": {
+      return {
+        ...state,
+        currentUser: {
+          ...state.currentUser,
+          userName: action.payload.editName,
+        },
+        users: [
+          ...state.users.filter((elem) => elem.email !== action.payload.email),
+          { ...state.currentUser, userName: action.payload.editName },
+        ],
+      };
+    }
+    case "EDIT_EMAIL": {
+      return {
+        ...state,
+        currentUser: {
+          ...state.currentUser,
+          email: action.payload.editEmail,
+        },
+        users: [
+          ...state.users.filter((elem) => elem.email !== action.payload.email),
+          { ...state.currentUser, email: action.payload.editEmail },
+        ],
+      };
+    }
+    case "EDIT_PASSWORD": {
+      return {
+        ...state,
+        currentUser: {
+          ...state.currentUser,
+          password: action.payload.editPassword,
+        },
+        users: [
+          ...state.users.filter((elem) => elem.email !== action.payload.email),
+          { ...state.currentUser, password: action.payload.editPassword },
+        ],
+      };
+    }
     default:
       return state;
   }
