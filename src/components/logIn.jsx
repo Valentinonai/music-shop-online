@@ -120,7 +120,7 @@ const LogIn = () => {
             </a>
             <hr />
             <div className="text-center">
-              <Link to={"/signUp"}>Non hai un account? Iscrivi a SongStore</Link>
+              <Link to={"/signUp"}>Non hai un account? Iscrivi a FloraMusic</Link>
             </div>
           </Col>
         </Row>
