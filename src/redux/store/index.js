@@ -5,10 +5,16 @@ import storage from "redux-persist/lib/storage";
 // eslint-disable-next-line no-unused-vars
 import LogIn from "../../components/logIn";
 import logIn from "../reducers/logIn";
+import { encryptTransform } from "redux-persist-transform-encrypt";
 
 const persistConfig = {
   key: "root",
   storage: storage,
+  transforms: [
+    encryptTransform({
+      secretKey: process.env.REACT_APP_LOCALSTORAGEKEY,
+    }),
+  ],
 };
 
 const rootReducer = combineReducers({
