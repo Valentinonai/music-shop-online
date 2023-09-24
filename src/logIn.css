@@ -1,3 +1,7 @@
+:root {
+  --logInTab-minWidth: 300px;
+  --logInTab-maxWidth: 400px;
+}
 body {
   margin: 0;
   padding: 0;
@@ -44,4 +48,34 @@ body {
 
 a {
   color: white;
+}
+
+h1 {
+  margin-bottom: 100px !important;
+  color: #845ed3;
+}
+h2 {
+  margin-bottom: 20px;
+}
+#logInTab {
+  color: white;
+  min-width: var(--logInTab-minWidth);
+  max-width: var(--logInTab-maxWidth);
+  position: relative;
+  padding-top: 100px !important;
+}
+
+#imgLogInTab {
+  border-radius: 75px;
+  overflow: hidden;
+  width: 150px;
+  height: 150px;
+  margin: auto;
+  position: absolute;
+  z-index: 4;
+  top: -75px;
+  left: 50%;
+  margin-left: -75px;
+  padding: 0;
+  box-shadow: 0 0 10px 2px #845ed3;
 }

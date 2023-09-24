@@ -6,6 +6,7 @@ const initialState = {
     email: "",
     password: "",
     imgProfilo: "",
+    userName: "",
   },
   logCheck: false,
 };
@@ -17,12 +18,18 @@ const logIn = (state = initialState, action) => {
         ...state,
         users: [
           ...state.users,
-          { email: action.payload.email, password: action.payload.password, imgProfilo: action.payload.imgProfilo },
+          {
+            email: action.payload.email,
+            password: action.payload.password,
+            imgProfilo: action.payload.imgProfilo,
+            userName: action.payload.userName,
+          },
         ],
         currentUser: {
           email: action.payload.email,
           password: action.payload.password,
           imgProfilo: action.payload.imgProfilo,
+          userName: action.payload.userName,
         },
         logCheck: true,
       };
@@ -34,6 +41,7 @@ const logIn = (state = initialState, action) => {
           email: action.payload.email,
           password: action.payload.password,
           imgProfilo: action.payload.imgProfilo,
+          userName: action.payload.userName,
         },
         logCheck: true,
       };
