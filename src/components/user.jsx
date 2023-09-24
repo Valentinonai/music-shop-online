@@ -23,6 +23,7 @@ const User = () => {
   const [editImg, setEditImg] = useState(user.imgProfilo);
 
   const [emailAlert, setEmailAlert] = useState(false);
+  const [emailAlert2, setEmailAlert2] = useState(false);
 
   const delAccount = () => {
     setDel(true);
@@ -36,6 +37,7 @@ const User = () => {
     <>
       {del && <Alert variant="danger">Account Eliminato</Alert>}
       {emailAlert && <Alert variant="warning">Mail già esistente Scegline un'altra</Alert>}
+      {emailAlert2 && <Alert variant="warning">Non hai inserito un'email valida</Alert>}
       {user.email !== "" && (
         <>
           <h1 className="mt-5 mb-1">Profile Page</h1>
@@ -121,6 +123,7 @@ const User = () => {
                 <div className="d-flex justify-content-between align-items-center">
                   {editEmailBool ? (
                     <input
+                      type="email"
                       className="mb-3 inputForm"
                       value={editEmail}
                       onChange={(e) => {
@@ -129,8 +132,16 @@ const User = () => {
                       onKeyUp={(e) => {
                         if (e.key === "Enter") {
                           if (users.findIndex((elem) => elem.email === editEmail) === -1) {
-                            dispatch({ type: "EDIT_EMAIL", payload: { editEmail: editEmail, email: user.email } });
-                            setEditEmailBool(false);
+                            if (editEmail.includes("@")) {
+                              dispatch({ type: "EDIT_EMAIL", payload: { editEmail: editEmail, email: user.email } });
+                              setEditEmailBool(false);
+                            } else {
+                              setEmailAlert2(true);
+                              setTimeout(() => {
+                                setEmailAlert2(false);
+                                setEditEmail(user.email);
+                              }, 2000);
+                            }
                           } else {
                             setEmailAlert(true);
                             setTimeout(() => {

@@ -5,12 +5,14 @@ import LogIn from "./components/logIn";
 import "./logIn.css";
 import SignUp from "./components/signUp";
 import User from "./components/user";
+import Home from "./components/Home";
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
+          <Route path="/" element={<Home />} />
           <Route path="/logIn" element={<LogIn />} />
           <Route path="/SignUp" element={<SignUp />} />
           <Route path="/user" element={<User />} />
