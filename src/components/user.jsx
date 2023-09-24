@@ -25,6 +25,8 @@ const User = () => {
   const [emailAlert, setEmailAlert] = useState(false);
   const [emailAlert2, setEmailAlert2] = useState(false);
 
+  const [genericAlert, setGenericAlert] = useState(false);
+
   const delAccount = () => {
     setDel(true);
     dispatch({ type: "DELETE_FROM_USER_PAGE", payload: user.email });
@@ -38,28 +40,35 @@ const User = () => {
       {del && <Alert variant="danger">Account Eliminato</Alert>}
       {emailAlert && <Alert variant="warning">Mail già esistente Scegline un'altra</Alert>}
       {emailAlert2 && <Alert variant="warning">Non hai inserito un'email valida</Alert>}
+      {genericAlert && <Alert variant="warning">Non hai inserito un valore valido</Alert>}
       {user.email !== "" && (
         <>
           <h1 className="mt-5 mb-1">Profile Page</h1>
           <Container>
             <Row className=" mt-5 border border-1 border-white rounded p-3 g-5">
               {editImgBool && (
-                <input
-                  className="mt-3 inputForm"
-                  defaultValue={editImg}
-                  onChange={(e) => {
-                    setEditImg(e.target.value);
-                  }}
-                  onKeyUp={(e) => {
-                    if (e.key === "Enter") {
+                <div className="d-flex w-100 align-items-center mt-0">
+                  <input
+                    className=" inputForm"
+                    defaultValue={editImg}
+                    onChange={(e) => {
+                      setEditImg(e.target.value);
+                    }}
+                  />
+                  <Button
+                    variant="outline-light"
+                    className=""
+                    onClick={() => {
                       dispatch({ type: "EDIT_IMG", payload: { editImg: editImg, email: user.email } });
                       setEditImgBool(false);
-                    }
-                  }}
-                />
+                    }}
+                  >
+                    <i class="bi bi-floppy2"></i>
+                  </Button>
+                </div>
               )}
-              <Col xs={12} md={4} className="mt-3">
-                <div>
+              <Col xs={12} md={4} className="mt-3 p-0">
+                <div className="mb-5 d-flex flex-column align-items-start">
                   <div
                     style={{
                       position: "relative",
@@ -68,7 +77,7 @@ const User = () => {
                       height: "150px",
                       borderRadius: "75px",
                     }}
-                    className="me-5 mb-5"
+                    className="me-5 mb-3"
                   >
                     <img
                       src={
@@ -87,30 +96,44 @@ const User = () => {
                       <i class="bi bi-pencil-square"></i>
                     </span>
                   </div>
-                  <Button variant="outline-light" className="d-none d-sm-block" onClick={delAccount}>
+                  <Button variant="outline-light" className="d-none d-md-block" onClick={delAccount}>
                     Elimina Account
                   </Button>
-                  <Button variant="outline-light" className="d-block d-sm-none" onClick={delAccount}>
+                  <Button variant="outline-light" className="d-block d-md-none" onClick={delAccount}>
                     <i class="bi bi-trash3"></i>
                   </Button>
                 </div>
               </Col>
-              <Col xs={12} md={8}>
+              <Col xs={12} md={8} className="mt-0 mt-md-4">
                 <div className="d-flex justify-content-between align-items-center">
                   {editNameBool ? (
-                    <input
-                      className="mb-3 inputForm"
-                      defaultValue={editName}
-                      onChange={(e) => {
-                        setEditName(e.target.value);
-                      }}
-                      onKeyUp={(e) => {
-                        if (e.key === "Enter") {
-                          dispatch({ type: "EDIT_NAME", payload: { editName: editName, email: user.email } });
-                          setEditNameBool(false);
-                        }
-                      }}
-                    />
+                    <div className="d-flex w-100 align-items-center">
+                      <input
+                        className=" inputForm"
+                        value={editName}
+                        onChange={(e) => {
+                          setEditName(e.target.value);
+                        }}
+                      />
+                      <Button
+                        variant="outline-light"
+                        className=""
+                        onClick={() => {
+                          if (editName !== "" && editName !== undefined) {
+                            dispatch({ type: "EDIT_NAME", payload: { editName: editName, email: user.email } });
+                            setEditNameBool(false);
+                          } else {
+                            setGenericAlert(true);
+                            setTimeout(() => {
+                              setGenericAlert(false);
+                            }, 2000);
+                            setEditName(user.userName);
+                          }
+                        }}
+                      >
+                        <i class="bi bi-floppy2"></i>
+                      </Button>
+                    </div>
                   ) : (
                     <>
                       <h4>Nome: {user.userName}</h4>
@@ -122,16 +145,20 @@ const User = () => {
                 </div>
                 <div className="d-flex justify-content-between align-items-center">
                   {editEmailBool ? (
-                    <input
-                      type="email"
-                      className="mb-3 inputForm"
-                      value={editEmail}
-                      onChange={(e) => {
-                        setEditEmail(e.target.value);
-                      }}
-                      onKeyUp={(e) => {
-                        if (e.key === "Enter") {
-                          if (users.findIndex((elem) => elem.email === editEmail) === -1) {
+                    <div className="d-flex w-100 align-items-center">
+                      <input
+                        type="email"
+                        className=" inputForm"
+                        value={editEmail}
+                        onChange={(e) => {
+                          setEditEmail(e.target.value);
+                        }}
+                      />
+                      <Button
+                        variant="outline-light"
+                        className=""
+                        onClick={() => {
+                          if (users.findIndex((elem) => elem.email === editEmail) === -1 || editEmail === user.email) {
                             if (editEmail.includes("@")) {
                               dispatch({ type: "EDIT_EMAIL", payload: { editEmail: editEmail, email: user.email } });
                               setEditEmailBool(false);
@@ -149,9 +176,11 @@ const User = () => {
                               setEditEmail(user.email);
                             }, 2000);
                           }
-                        }
-                      }}
-                    />
+                        }}
+                      >
+                        <i class="bi bi-floppy2"></i>
+                      </Button>
+                    </div>
                   ) : (
                     <>
                       <h4>Email: {user.email}</h4>
@@ -163,22 +192,36 @@ const User = () => {
                 </div>
                 <div className="d-flex justify-content-between align-items-center">
                   {editPasswordBool ? (
-                    <input
-                      className="mb-3 inputForm"
-                      defaultValue={editPassword}
-                      onChange={(e) => {
-                        setEditPassword(e.target.value);
-                      }}
-                      onKeyUp={(e) => {
-                        if (e.key === "Enter") {
-                          dispatch({
-                            type: "EDIT_PASSWORD",
-                            payload: { editPassword: editPassword, email: user.email },
-                          });
-                          setEditPasswordBool(false);
-                        }
-                      }}
-                    />
+                    <div className="d-flex w-100 align-items-center">
+                      <input
+                        className=" inputForm"
+                        value={editPassword}
+                        onChange={(e) => {
+                          setEditPassword(e.target.value);
+                        }}
+                      />
+                      <Button
+                        variant="outline-light"
+                        className=""
+                        onClick={() => {
+                          if (editPassword !== "" && editPassword !== undefined) {
+                            dispatch({
+                              type: "EDIT_PASSWORD",
+                              payload: { editPassword: editPassword, email: user.email },
+                            });
+                            setEditPasswordBool(false);
+                          } else {
+                            setGenericAlert(true);
+                            setTimeout(() => {
+                              setGenericAlert(false);
+                            }, 2000);
+                            setEditPassword(user.password);
+                          }
+                        }}
+                      >
+                        <i class="bi bi-floppy2"></i>
+                      </Button>
+                    </div>
                   ) : (
                     <>
                       <h4>Password: ************</h4>
