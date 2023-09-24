@@ -79,7 +79,7 @@ const LogIn = () => {
               style={{ objectFit: "cover" }}
             />
           </div>
-          <h2 className="text-center">Hi {prevname ? prevname : "..."}</h2>
+          <h2 className="text-center">Ciao {prevname ? prevname : "..."}</h2>
           <hr />
           <Col xs={12}>
             <Form onSubmit={checkLogIn} className="d-flex flex-column">
