@@ -45,13 +45,7 @@ const SignUp = () => {
       <Container className=" mt-5 border border-white p-3 rounded" style={{ color: "white" }}>
         {accountCreato && <Alert variant="success">Account Creato</Alert>}
         {noMail && <Alert variant="danger">Mail già esistente</Alert>}
-        {genericError && (
-          <Alert variant="warning">
-            I dati non soddisfano i parametri richiesti(la mail deve essere una mail esistente) e la password deve
-            contenere uno dei seguenti caratteri("$"@"#"!"?"*"+"."&"%"(")"_":",";"/"="-"'"), una lettera maiuscola e
-            almeno 6 caratteri
-          </Alert>
-        )}
+        {genericError && <Alert variant="warning">I dati non soddisfano i parametri richiesti</Alert>}
 
         <Row>
           <Col xs={12}>
@@ -71,6 +65,7 @@ const SignUp = () => {
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Email address</Form.Label>
                 <Form.Control
+                  title="La mail deve essere una mail esistente"
                   type="email"
                   placeholder="Enter email"
                   defaultValue={email}
@@ -83,6 +78,9 @@ const SignUp = () => {
               <Form.Group className="mb-3" controlId="formBasicPassword">
                 <Form.Label>Password</Form.Label>
                 <Form.Control
+                  title="La password deve
+                contenere uno dei seguenti caratteri( $ @ # ! ? * + . & % ( ) _ : , ; / = - ' ), una lettera maiuscola e
+                almeno 6 caratteri"
                   type="password"
                   placeholder="Password"
                   required
