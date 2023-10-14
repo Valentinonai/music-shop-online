@@ -5,3 +5,10 @@ nav a {
   display: block;
   font-size: 20px;
 }
+#topBar {
+  background-image: linear-gradient(0deg, #845ed3, #bda8e9);
+}
+
+.dropdown-menu.show {
+  background-image: linear-gradient(0deg, #845ed3, #bda8e9);
+}

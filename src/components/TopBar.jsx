@@ -12,9 +12,18 @@ const TopBar = () => {
   };
 
   return (
-    <Navbar expand="sm" className="bg-body-tertiary" style={{ position: "sticky", width: "100%", top: "0px" }}>
-      <Container fluid="lg">
-        <Navbar.Brand href="#home">FloraStore</Navbar.Brand>
+    <Navbar
+      expand="sm"
+      className=""
+      style={{
+        position: "sticky",
+        width: "100%",
+        top: "0px",
+      }}
+      id="topBar"
+    >
+      <Container fluid>
+        <Navbar.Brand style={{ fontSize: "30px" }}>FloraStore</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className=" d-flex align-items-center justify-content-between w-100">
