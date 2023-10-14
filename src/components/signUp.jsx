@@ -42,7 +42,7 @@ const SignUp = () => {
   return (
     <>
       <h1 className="text-center mt-5 mb-2">Accedi a FloraMusic</h1>
-      <Container className=" mt-5 border border-white p-3 rounded" style={{ color: "white" }}>
+      <Container className=" mt-5 border border-white p-3 rounded w-50" style={{ color: "white" }}>
         {accountCreato && <Alert variant="success">Account Creato</Alert>}
         {noMail && <Alert variant="danger">Mail già esistente</Alert>}
         {genericError && <Alert variant="warning">I dati non soddisfano i parametri richiesti</Alert>}

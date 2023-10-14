@@ -44,8 +44,8 @@ const User = () => {
       {genericAlert && <Alert variant="warning">Non hai inserito un valore valido</Alert>}
       {user.email !== "" && (
         <>
-          <h1 className="mt-5 mb-1">Profile Page</h1>
-          <Container>
+          <Container className="w-75">
+            <h1 className="mt-5 mb-1 ">Profile Page</h1>
             <Row className=" mt-5 border border-1 border-white rounded p-3 g-5">
               {editImgBool && (
                 <div className="d-flex w-100 align-items-center mt-0">

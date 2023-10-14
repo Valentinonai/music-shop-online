@@ -123,6 +123,17 @@ const logIn = (state = initialState, action) => {
         ],
       };
     }
+    case "ESCI": {
+      return {
+        ...state,
+        currentUser: {
+          ...state.currentUser,
+          password: "",
+          imgProfilo: "",
+          userName: "",
+        },
+      };
+    }
     default:
       return state;
   }
